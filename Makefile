@@ -36,11 +36,11 @@ build-prepare:
 .PHONY: build-darwin
 build-darwin:
 	@echo "Building darwin ${VERSION}"
-	@GOOS=darwin GOARCH=amd64 CGO_ENABLED=0 go build -buildmode=pie -ldflags="-X main.Version=${VERSION} -s -w" -o bin/${NAME}-darwin-x64 main.go
+	@GOOS=darwin GOARCH=amd64 CGO_ENABLED=0 go build -buildmode=pie -ldflags="-X main.Version=${VERSION} -s -w" -o bin/${NAME}-darwin main.go
 .PHONY: build-linux
 build-linux:
 	@echo "Building Linux ${VERSION}"
-	@GOOS=linux GOARCH=amd64 go build -buildmode=pie -ldflags="-X main.Version=${VERSION} -w" -o bin/${NAME}-linux-x64 main.go		
+	@GOOS=linux GOARCH=amd64 go build -buildmode=pie -ldflags="-X main.Version=${VERSION} -w" -o bin/${NAME}-linux main.go		
 .PHONY: build-windows
 build-windows:
 	@echo "Building Windows ${VERSION}"

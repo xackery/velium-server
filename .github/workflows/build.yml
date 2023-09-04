@@ -14,9 +14,9 @@ jobs:
         with:
           repo_token: "${{secrets.GITHUB_TOKEN}}"
           automatic_release_tag: "${{env.VERSION}}"
-          prerelease: true
+          prerelease: false
           title: "${{env.VERSION}}"
           files: |
             bin/velium-server-linux
-            bin/velium-server-windows.exe
+            bin/velium-server.exe
             bin/velium-server-darwin

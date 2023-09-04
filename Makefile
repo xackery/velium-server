@@ -1,11 +1,6 @@
 NAME ?= velium-server
 VERSION ?= 0.0.1
 
-# CICD triggers this
-.PHONY: set-variable
-set-version:
-	@echo "VERSION=${VERSION}" >> $$GITHUB_ENV
-
 #go install golang.org/x/tools/cmd/goimports@latest
 #go install github.com/fzipp/gocyclo/cmd/gocyclo@latest
 #go install golang.org/x/lint/golint@latest
@@ -50,3 +45,7 @@ build-linux:
 build-windows:
 	@echo "Building Windows ${VERSION}"
 	GOOS=windows GOARCH=amd64 go build -buildmode=pie -ldflags="-X main.Version=${VERSION} -X main.PatcherURL=${PATCHER_URL} -s -w" -o bin/${NAME}.exe
+
+# CICD triggers this
+set-version-%:
+	@echo "VERSION=${VERSION}.$*" >> $$GITHUB_ENV

@@ -27,7 +27,7 @@ bundle:
 	go-winres simply --icon velium-server.png
 
 .PHONY: build-all
-build-all: sanitize build-prepare build-linux build-darwin build-windows	
+build-all: build-prepare build-linux build-darwin build-windows	
 .PHONY: build-prepare
 build-prepare:
 	@echo "Preparing talkeq ${VERSION}"

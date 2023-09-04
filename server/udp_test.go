@@ -68,6 +68,7 @@ func TestUDP(t *testing.T) {
 	for _, id := range session {
 		data = append(data, byte(id))
 	}
+	data = append(data, '\n')
 
 	fmt.Printf("Sending session: %v\n", data)
 

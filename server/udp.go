@@ -66,7 +66,6 @@ func (s *udpServer) handleClient(clientAddr *net.UDPAddr, data []byte) {
 		s.clients[clientKey] = client
 	}
 
-	fmt.Printf("[udp] From %s: 0x%x %s\n", client.Identity(), data[0], string(data[1:]))
 	s.parseMessage(client, data)
 	client.lastSeen = time.Now()
 }
@@ -114,8 +113,8 @@ func (s *udpServer) parseMessageInternal(client *udpClient, data []byte) error {
 		return nil
 	case opSession:
 		var err error
-		if len(data) != 17 {
-			return fmt.Errorf("invalid opSession message (%d bytes, wanted 17)", len(data))
+		if len(data) != 18 {
+			return fmt.Errorf("invalid opSession message (%d bytes, wanted 18)", len(data))
 		}
 
 		session := uuid.UUID{}
@@ -128,8 +127,9 @@ func (s *udpServer) parseMessageInternal(client *udpClient, data []byte) error {
 			if err != nil {
 				fmt.Printf("[udp] Error writing quit: %v\n", err)
 			}
+			return nil
 		}
-
+		client.identifier = shim.Name
 		client.session = session
 		fmt.Printf("[udp] Client %s identified, session UUID: %s\n", client.Identity(), client.session.String())
 		return nil
